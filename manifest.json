@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Add Hyphen Shortcut on Notion",
+  "version": "1.0.0",
+  "description": "NotionでCommand + Shift + 8でハイフンを入力",
+  "permissions": [],
+  "content_scripts": [
+    {
+      "matches": ["https://*.notion.so/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
