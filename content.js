@@ -1,41 +1,37 @@
 // Command + Shift + 8 でハイフンを入力
-function insertBulletPoint(event, activeElement) {
+function insertBulletPoint(activeElement) {
   // githubの場合は処理をやめる. デフォルトでショートカットキーが使えるため
   if (window.location.hostname === "github.com") {
     return
   }
 
-  if (event.metaKey && event.shiftKey && event.key === "8") {
-    // contentEditableの場合(Notion用)
-    if (activeElement.isContentEditable) {
-      document.execCommand("insertText", false, "- ")
-    }
+  // contentEditableの場合(Notion用)
+  if (activeElement.isContentEditable) {
+    document.execCommand("insertText", false, "- ")
   }
 }
 
 // Command + Shift + 9 でTODOを入力
-function insertTodo(event, activeElement) {
-  if (event.metaKey && event.shiftKey && event.key === "9") {
-    // contentEditableの場合(Notion用)
-    if (activeElement.isContentEditable) {
-      document.execCommand("insertText", false, "[] ")
-    }
-    // input/textareaの場合
-    else {
-      const start = activeElement.selectionStart
-      const end = activeElement.selectionEnd
-      const value = activeElement.value
+function insertTodo(activeElement) {
+  // contentEditableの場合(Notion用)
+  if (activeElement.isContentEditable) {
+    document.execCommand("insertText", false, "[] ")
+  }
+  // input/textareaの場合
+  else {
+    const start = activeElement.selectionStart
+    const end = activeElement.selectionEnd
+    const value = activeElement.value
 
-      // カーソル位置に`- [ ] `を挿入. Github用
-      activeElement.value =
-        value.substring(0, start) + "- [ ] " + value.substring(end)
+    // カーソル位置に`- [ ] `を挿入. Github用
+    activeElement.value =
+      value.substring(0, start) + "- [ ] " + value.substring(end)
 
-      // カーソル位置を更新
-      activeElement.selectionStart = activeElement.selectionEnd = start + 6
+    // カーソル位置を更新
+    activeElement.selectionStart = activeElement.selectionEnd = start + 6
 
-      // inputイベントを発火（Reactなどのフレームワーク対応）
-      activeElement.dispatchEvent(new Event("input", { bubbles: true }))
-    }
+    // inputイベントを発火（Reactなどのフレームワーク対応）
+    activeElement.dispatchEvent(new Event("input", { bubbles: true }))
   }
 }
 
@@ -53,10 +49,10 @@ document.addEventListener("keydown", (event) => {
   if (event.metaKey && event.shiftKey) {
     if (event.key === "8") {
       event.preventDefault()
-      insertBulletPoint(event, activeElement)
+      insertBulletPoint(activeElement)
     } else if (event.key === "9") {
       event.preventDefault()
-      insertTodo(event, activeElement)
+      insertTodo(activeElement)
     }
   }
 })
