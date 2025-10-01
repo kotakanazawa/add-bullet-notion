@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Add Hyphen Shortcut on Notion",
+  "name": "Notion/Github用ショートカットキー拡張",
   "version": "1.0.0",
-  "description": "NotionでCommand + Shift + 8でハイフンを入力",
+  "description": "バレットポイントとTODOを入力するショートカットキー拡張",
   "permissions": [],
   "content_scripts": [
     {
