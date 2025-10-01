@@ -1,12 +1,12 @@
 // Command + Shift + 8 でハイフンを入力
 function insertBulletPoint(event, activeElement) {
-  // githubの場合は処理をやめる
+  // githubの場合は処理をやめる. デフォルトでショートカットキーが使えるため
   if (window.location.hostname === "github.com") {
     return
   }
 
   if (event.metaKey && event.shiftKey && event.key === "8") {
-    // contentEditableの場合
+    // contentEditableの場合(Notion用)
     if (activeElement.isContentEditable) {
       document.execCommand("insertText", false, "- ")
     }
@@ -16,7 +16,7 @@ function insertBulletPoint(event, activeElement) {
 // Command + Shift + 9 でTODOを入力
 function insertTodo(event, activeElement) {
   if (event.metaKey && event.shiftKey && event.key === "9") {
-    // contentEditableの場合
+    // contentEditableの場合(Notion用)
     if (activeElement.isContentEditable) {
       document.execCommand("insertText", false, "[] ")
     }
