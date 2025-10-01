@@ -6,7 +6,7 @@
   "permissions": [],
   "content_scripts": [
     {
-      "matches": ["https://*.notion.so/*"],
+      "matches": ["https://*.notion.so/*", "https://github.com/*"],
       "js": ["content.js"],
       "run_at": "document_end"
     }
