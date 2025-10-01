@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "Notion/Github用ショートカットキー拡張",
+  "name": "Notion用ショートカットキー拡張",
   "version": "1.0.0",
   "description": "バレットポイントとTODOを入力するショートカットキー拡張",
   "permissions": [],
   "content_scripts": [
     {
-      "matches": ["https://*.notion.so/*", "https://github.com/*"],
+      "matches": ["https://*.notion.so/*"],
       "js": ["content.js"],
       "run_at": "document_end"
     }
