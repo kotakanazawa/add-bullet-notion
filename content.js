@@ -22,13 +22,14 @@ function insertTodo(activeElement) {
     const start = activeElement.selectionStart
     const end = activeElement.selectionEnd
     const value = activeElement.value
+    const todoText = "- [ ] "
 
     // カーソル位置に`- [ ] `を挿入. Github用
     activeElement.value =
-      value.substring(0, start) + "- [ ] " + value.substring(end)
+      value.substring(0, start) + todoText + value.substring(end)
 
     // カーソル位置を更新
-    activeElement.selectionStart = activeElement.selectionEnd = start + 6
+    activeElement.selectionStart = activeElement.selectionEnd = start + todoText.length
 
     // inputイベントを発火（Reactなどのフレームワーク対応）
     activeElement.dispatchEvent(new Event("input", { bubbles: true }))
