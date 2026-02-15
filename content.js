@@ -1,17 +1,34 @@
-// Command + Shift + 8 でハイフンを入力
-function insertBulletPoint(activeElement) {
-  // contentEditableの場合(Notion用)
-  if (activeElement.isContentEditable) {
-    document.execCommand("insertText", false, "- ")
-  }
+// カーソルがどこにあっても行頭にテキストを挿入し、Notionのブロック変換を発火させる
+function insertAtLineStart(activeElement, prefix) {
+  if (!activeElement.isContentEditable) return
+
+  const sel = window.getSelection()
+  if (!sel.rangeCount) return
+
+  // カーソルを行頭に移動
+  sel.modify("move", "backward", "lineboundary")
+
+  // プレフィックス（"-" や "[]"）を挿入
+  document.execCommand("insertText", false, prefix)
+
+  // スペースを別途挿入してNotionのブロック変換を発火させる
+  document.execCommand("insertText", false, " ")
+
+  // Notionの変換処理を待ってからカーソルを文末に移動
+  setTimeout(() => {
+    const s = window.getSelection()
+    s.modify("move", "forward", "lineboundary")
+  }, 0)
 }
 
-// Command + Shift + 9 でTODOを入力
+// Command + Shift + 8 でバレットポイントを挿入
+function insertBulletPoint(activeElement) {
+  insertAtLineStart(activeElement, "-")
+}
+
+// Command + Shift + 9 でTODOを挿入
 function insertTodo(activeElement) {
-  // contentEditableの場合(Notion用)
-  if (activeElement.isContentEditable) {
-    document.execCommand("insertText", false, "[] ")
-  }
+  insertAtLineStart(activeElement, "[]")
 }
 
 document.addEventListener("keydown", (event) => {
