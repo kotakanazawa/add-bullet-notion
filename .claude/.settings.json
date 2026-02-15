@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(prd-writing)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "hooks": {}
+}
