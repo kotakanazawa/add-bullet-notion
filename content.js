@@ -2,11 +2,11 @@
 function insertAtLineStart(activeElement, prefix) {
   if (!activeElement.isContentEditable) return
 
-  const sel = window.getSelection()
-  if (!sel.rangeCount) return
+  const selection = window.getSelection()
+  if (!selection.rangeCount) return
 
   // カーソルを行頭に移動
-  sel.modify("move", "backward", "lineboundary")
+  selection.modify("move", "backward", "lineboundary")
 
   // プレフィックス（"-" や "[]"）を挿入
   document.execCommand("insertText", false, prefix)
@@ -16,8 +16,8 @@ function insertAtLineStart(activeElement, prefix) {
 
   // Notionの変換処理を待ってからカーソルを文末に移動
   setTimeout(() => {
-    const s = window.getSelection()
-    s.modify("move", "forward", "lineboundary")
+    const selection = window.getSelection()
+    selection.modify("move", "forward", "lineboundary")
   }, 0)
 }
 
